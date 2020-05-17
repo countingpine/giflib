@@ -56,7 +56,7 @@ Enables printout of running scan lines. </para>
 <varlistentry>
 <term>-b</term>
 <listitem>
-<para>Set the image's backround color to a given numeric index.</para>
+<para>Set the image's background color to a given numeric index.</para>
 </listitem>
 </varlistentry>
 <varlistentry>
