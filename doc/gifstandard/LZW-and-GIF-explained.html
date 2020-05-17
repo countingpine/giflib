@@ -203,7 +203,7 @@ is in the table, as the code just added. So it will output the code
 for P[...]P if it finds that P[...]PQ is not in the table.  The
 decompressor is always "one step behind" the compressor. When the
 decompressor sees the code for P[...]P, it will not have added that
-code to it's string table yet because it needed the beginning
+code to its string table yet because it needed the beginning
 character of P[...]P to add to the string for the last code, P[...],
 to form the code for P[...]P. However, when a decompressor finds a
 code that it doesn't know yet, it will always be the very next one to

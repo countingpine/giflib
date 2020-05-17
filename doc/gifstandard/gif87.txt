@@ -178,7 +178,7 @@ Specification
    later.  However this  global  map  will  normally  be  used  because  of
    hardware  restrictions  in equipment available today.  In the individual
    Image Descriptors the 'M' flag will normally be  zero.   If  the  Global
-   Color  Map  is  present,  it's definition immediately follows the Screen
+   Color  Map  is  present,  its  definition immediately follows the Screen
    Descriptor.   The  number  of  color  map  entries  following  a  Screen
    Descriptor  is equal to 2**(# bits per pixel), where each entry consists
    of three byte values representing the relative intensities of red, green

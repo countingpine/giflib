@@ -335,7 +335,7 @@ will create a new leading extension block.</para>
 int GifErrorString(int ErrorCode)
 </programlisting>
 
-<para>Returns a sting describing the specified GIFLIB error code.
+<para>Returns a string describing the specified GIFLIB error code.
 Return NULL if the argument is not a valid error code.</para>
 
 </sect1>
