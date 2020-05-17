@@ -65,13 +65,13 @@ INTRODUCTION
 
         The main focus  of  this  document  is  to  provide  the  technical
    information  necessary  for  a  programmer to implement GIF encoders and
-   decoders.  As such, some assumptions are made as to terminology relavent
+   decoders.  As such, some assumptions are made as to terminology relevant
    to graphics and programming in general.
 
         The first section of this document describes the  GIF  data  format
    and its components and applies to all GIF decoders, either as standalone
    programs or as part of  a  communications  package.   Appendix  B  is  a
-   section  relavent to decoders that are part of a communications software
+   section  relevant to decoders that are part of a communications software
    package and describes the protocol requirements for entering and exiting
    GIF mode, and responding to host interrogations.  A glossary in Appendix
    A defines some of the terminology used in  this  document.   Appendix  C
@@ -129,7 +129,7 @@ Specification
 
         The Screen Descriptor describes the overall parameters for all  GIF
    images  following.  It defines the overall dimensions of the image space
-   or logical screen required, the existance of color mapping  information,
+   or logical screen required, the existence of color mapping  information,
    background  screen color, and color depth information.  This information
    is stored in a series of 8-bit bytes as described below.
 
@@ -382,7 +382,7 @@ Specification
         |0 0 0 0 0 0 0 0|       zero byte count (terminates block)
         +---------------+
 
-        A GIF Extension Block may immediately preceed any Image  Descriptor
+        A GIF Extension Block may immediately precede any Image  Descriptor
    or occur before the GIF Terminator.
 
         All GIF decoders must be able to recognize  the  existence  of  GIF
@@ -409,14 +409,14 @@ Raster - A horizontal row of pixels representing one line of an  image.   A
    work most efficiently in this manner.
 
 LSB - Least Significant Byte.  Refers to a convention for two byte  numeric
-   values in which the less significant byte of the value preceeds the more
+   values in which the less significant byte of the value precedes the more
    significant byte.  This convention is typical on many microcomputers.
 
 Color Map - The list of definitions of each color  used  in  a  GIF  image.
    These  desired  colors are converted to available colors through a table
    which is derived by assigning an incoming color index (from  the  image)
    to  an  output  color  index  (of  the  hardware).   While the color map
-   definitons are specified in a GIF image, the output  pixel  colors  will
+   definitions are specified in a GIF image, the output pixel  colors  will
    vary  based  on  the  hardware used and its ability to match the defined
    color.
 
@@ -569,7 +569,7 @@ Appendix C - Image Packaging & Compression
        of compression codes.
    3.  Build a Series of Bytes - Take the  set  of  compression  codes  and
        convert to a string of 8-bit bytes.
-   4.  Package the Bytes - Package sets of bytes into blocks  preceeded  by
+   4.  Package the Bytes - Package sets of bytes into blocks  preceded  by
        character counts and output.
 
 ESTABLISH CODE SIZE
@@ -643,7 +643,7 @@ BUILD 8-BIT BYTES
 PACKAGE THE BYTES
 
         Once the bytes have been created, they are grouped into blocks  for
-   output by preceeding each block of 0 to 255 bytes with a character count
+   output by preceding  each block of 0 to 255 bytes with a character count
    byte.  A block with a zero byte count terminates the Raster Data  stream
    for  a  given  image.  These blocks are what are actually output for the
 
