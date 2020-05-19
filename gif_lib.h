@@ -157,7 +157,7 @@ int EGifPutImageDesc(GifFileType *GifFile,
 		     const bool GifInterlace,
                      const ColorMapObject *GifColorMap);
 void EGifSetGifVersion(GifFileType *GifFile, const bool gif89);
-int EGifPutLine(GifFileType *GifFile, GifPixelType *GifLine,
+int EGifPutLine(GifFileType *GifFile, const GifPixelType *GifLine,
                 int GifLineLen);
 int EGifPutPixel(GifFileType *GifFile, const GifPixelType GifPixel);
 int EGifPutComment(GifFileType *GifFile, const char *GifComment);

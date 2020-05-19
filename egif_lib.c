@@ -36,7 +36,7 @@ static const GifPixelType CodeMask[] = {
 
 static int EGifPutWord(int Word, GifFileType * GifFile);
 static int EGifSetupCompress(GifFileType * GifFile);
-static int EGifCompressLine(GifFileType * GifFile, GifPixelType * Line,
+static int EGifCompressLine(GifFileType * GifFile, const GifPixelType * Line,
                             int LineLen);
 static int EGifCompressOutput(GifFileType * GifFile, int Code);
 static int EGifBufferedOutput(GifFileType * GifFile, GifByteType * Buf,
@@ -452,10 +452,8 @@ EGifPutImageDesc(GifFileType *GifFile,
  Put one full scanned line (Line) of length LineLen into GIF file.
 ******************************************************************************/
 int
-EGifPutLine(GifFileType * GifFile, GifPixelType *Line, int LineLen)
+EGifPutLine(GifFileType * GifFile, GifPixelType const *Line, int LineLen)
 {
-    int i;
-    GifPixelType Mask;
     GifFilePrivateType *Private = (GifFilePrivateType *) GifFile->Private;
 
     if (!IS_WRITEABLE(Private)) {
@@ -471,12 +469,6 @@ EGifPutLine(GifFileType * GifFile, GifPixelType *Line, int LineLen)
         return GIF_ERROR;
     }
     Private->PixelCount -= LineLen;
-
-    /* Make sure the codes are not out of bit range, as we might generate
-     * wrong code (because of overflow when we combine them) in this case: */
-    Mask = CodeMask[Private->BitsPerPixel];
-    for (i = 0; i < LineLen; i++)
-        Line[i] &= Mask;
 
     return EGifCompressLine(GifFile, Line, LineLen);
 }
@@ -500,10 +492,6 @@ EGifPutPixel(GifFileType *GifFile, GifPixelType Pixel)
         return GIF_ERROR;
     }
     --Private->PixelCount;
-
-    /* Make sure the code is not out of bit range, as we might generate
-     * wrong code (because of overflow when we combine them) in this case: */
-    Pixel &= CodeMask[Private->BitsPerPixel];
 
     return EGifCompressLine(GifFile, &Pixel, 1);
 }
@@ -890,22 +878,26 @@ EGifSetupCompress(GifFileType *GifFile)
 ******************************************************************************/
 static int
 EGifCompressLine(GifFileType *GifFile,
-                 GifPixelType *Line,
+                 const GifPixelType *Line,
                  const int LineLen)
 {
     int i = 0, CrntCode;
     GifHashTableType *HashTable;
     GifFilePrivateType *Private = (GifFilePrivateType *) GifFile->Private;
 
+    /* Make sure the codes are not out of bit range, as we might generate
+     * wrong code (because of overflow when we combine them) in this case: */
+    GifPixelType Mask = CodeMask[Private->BitsPerPixel];
+
     HashTable = Private->HashTable;
 
     if (Private->CrntCode == FIRST_CODE)    /* Its first time! */
-        CrntCode = Line[i++];
+        CrntCode = Line[i++] & Mask;
     else
         CrntCode = Private->CrntCode;    /* Get last code in compression. */
 
     while (i < LineLen) {   /* Decode LineLen items. */
-	GifPixelType Pixel = Line[i++];  /* Get next pixel from stream. */
+	GifPixelType Pixel = Line[i++] & Mask;  /* Get next pixel from stream. */
         /* Form a new unique key to search hash table for the code combines 
          * CrntCode as Prefix string with Pixel as postfix char.
          */
