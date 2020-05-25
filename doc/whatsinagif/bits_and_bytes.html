@@ -489,7 +489,7 @@ compression</a> to see how this works.)  The rest of the bytes
 represent <em>data sub-blocks</em>. Data sub-blocks are are groups of
 1 - 256 bytes. The first byte in the sub-block tells you how many
 bytes of actual data follow. This can be a value from 0 (<span
-class="byte">00</span>) it 255 (<span class="byte">FF</span>). After
+class="byte">00</span>) to 255 (<span class="byte">FF</span>). After
 you've read those bytes, the next byte you read will tell you now many
 more bytes of data follow that one. You continue to read until you
 reach a sub-block that says that zero bytes follow.
@@ -657,7 +657,7 @@ for your comment. As you can see from the example we have one data
 sub-block that is 9 bytes long. If you translate the character codes
 you see that the comment is &quot;blueberry.&quot; The final byte,
 <span class="byte">00</span>, indicates a sub-block with zero bytes
-that follow which let's us know we have reached the end of the block.</p>
+that follow which lets us know we have reached the end of the block.</p>
 
 <p style="text-align:center"><img src="comment_ext.gif" alt="GIF comment extension block layout" style="border: 1px solid black" /></p>
 
